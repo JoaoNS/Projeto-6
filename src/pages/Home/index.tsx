@@ -1,78 +1,40 @@
 import Footer from '../../components/Footer'
 import Hero from '../../components/Hero'
 import RestaurantList from '../../components/RestaurantList'
-import Restaurant from '../../models/Restaurant'
-import Hioki from '../../assets/HiokiSushi.png'
-import tratoria from '../../assets/tratoria.png'
+import { useGetRestaurantsQuery } from '../../services/api'
 
-const restaurant: Restaurant[] = [
-  {
-    id: 1,
-    RestaurantCategories: ['Destaque do dia', 'Japonesa'],
-    RestaurantDetails:
-      'Peça já o melhor da culinária japonesa no conforto da sua casa! Sushis frescos, sashimis deliciosos e pratos quentes irresistíveis. Entrega rápida, embalagens cuidadosas e qualidade garantida.Experimente o Japão sem sair do lar com nosso delivery!',
-    RestaurantPhoto: Hioki,
-    RestaurantTitle: 'Hioki Sushi',
-    RestaurantRate: 4.9,
-    RestaurantToLink: '/perfil'
-  },
-  {
-    id: 2,
-    RestaurantCategories: ['Italiana'],
-    RestaurantDetails:
-      'A La Dolce Vita Trattoria leva a autêntica cozinha italiana até você! Desfrute de massas caseiras, pizzas deliciosas e risotos incríveis, tudo no conforto do seu lar. Entrega rápida, pratos bem embalados e sabor inesquecível. Peça já!',
-    RestaurantPhoto: tratoria,
-    RestaurantTitle: 'La Dolce Vita Trattoria',
-    RestaurantRate: 4.6,
-    RestaurantToLink: '/perfil'
-  },
-  {
-    id: 3,
-    RestaurantCategories: ['Italiana'],
-    RestaurantDetails:
-      'A La Dolce Vita Trattoria leva a autêntica cozinha italiana até você! Desfrute de massas caseiras, pizzas deliciosas e risotos incríveis, tudo no conforto do seu lar. Entrega rápida, pratos bem embalados e sabor inesquecível. Peça já!',
-    RestaurantPhoto: tratoria,
-    RestaurantTitle: 'La Dolce Vita Trattoria',
-    RestaurantRate: 4.6,
-    RestaurantToLink: '/perfil'
-  },
-  {
-    id: 4,
-    RestaurantCategories: ['Italiana'],
-    RestaurantDetails:
-      'A La Dolce Vita Trattoria leva a autêntica cozinha italiana até você! Desfrute de massas caseiras, pizzas deliciosas e risotos incríveis, tudo no conforto do seu lar. Entrega rápida, pratos bem embalados e sabor inesquecível. Peça já!',
-    RestaurantPhoto: tratoria,
-    RestaurantTitle: 'La Dolce Vita Trattoria',
-    RestaurantRate: 4.6,
-    RestaurantToLink: '/perfil'
-  },
-  {
-    id: 5,
-    RestaurantCategories: ['Italiana'],
-    RestaurantDetails:
-      'A La Dolce Vita Trattoria leva a autêntica cozinha italiana até você! Desfrute de massas caseiras, pizzas deliciosas e risotos incríveis, tudo no conforto do seu lar. Entrega rápida, pratos bem embalados e sabor inesquecível. Peça já!',
-    RestaurantPhoto: tratoria,
-    RestaurantTitle: 'La Dolce Vita Trattoria',
-    RestaurantRate: 4.6,
-    RestaurantToLink: '/perfil'
-  },
-  {
-    id: 6,
-    RestaurantCategories: ['Italiana'],
-    RestaurantDetails:
-      'A La Dolce Vita Trattoria leva a autêntica cozinha italiana até você! Desfrute de massas caseiras, pizzas deliciosas e risotos incríveis, tudo no conforto do seu lar. Entrega rápida, pratos bem embalados e sabor inesquecível. Peça já!',
-    RestaurantPhoto: tratoria,
-    RestaurantTitle: 'La Dolce Vita Trattoria',
-    RestaurantRate: 4.6,
-    RestaurantToLink: '/perfil'
+export type Restaurant = {
+  id: number
+  titulo: string
+  destacado: boolean
+  tipo: string
+  avaliacao: number
+  descricao: string
+  capa: string
+  cardapio: [
+    {
+      foto: string
+      preco: number
+      id: number
+      nome: string
+      descricao: string
+      porcao: string
+    }
+  ]
+}
+
+const Home = () => {
+  const { data: restaurants } = useGetRestaurantsQuery()
+
+  if (restaurants) {
+    return (
+      <>
+        <Hero />
+        <RestaurantList restaurants={restaurants} />
+        <Footer />
+      </>
+    )
   }
-]
-
-const Home = () => (
-  <>
-    <Hero />
-    <RestaurantList restaurants={restaurant} />
-    <Footer />
-  </>
-)
+  return <h4>Loading...</h4>
+}
 export default Home
