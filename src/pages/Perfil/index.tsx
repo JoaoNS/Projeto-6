@@ -5,6 +5,7 @@ import FoodList from '../../components/FoodList'
 import Footer from '../../components/Footer'
 
 import { useGetRestaurantSelectedQuery } from '../../services/api'
+import Cart from '../../components/Cart'
 
 const Perfil = () => {
   const { id } = useParams()
@@ -13,10 +14,19 @@ const Perfil = () => {
   if (restaurantFood) {
     return (
       <>
-        <Header itens={0} />
+        <Header />
         <Apresentacao restaurant={restaurantFood} />
-        <FoodList restaurant={restaurantFood} />
+        <FoodList
+          restaurant={restaurantFood}
+          pedido={{
+            id: 0,
+            nome: '',
+            foto: '',
+            preco: 0
+          }}
+        />
         <Footer />
+        <Cart />
       </>
     )
   }

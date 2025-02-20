@@ -3,6 +3,12 @@ import Hero from '../../components/Hero'
 import RestaurantList from '../../components/RestaurantList'
 import { useGetRestaurantsQuery } from '../../services/api'
 
+export type Pedido = {
+  id: number
+  nome: string
+  foto: string
+  preco: number
+}
 export type Restaurant = {
   id: number
   titulo: string
