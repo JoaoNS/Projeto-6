@@ -1,16 +1,21 @@
 import Product from '../Restaurant'
 import { Container, List } from './styles'
-import { Restaurant } from '../../pages/Home'
 import { useState } from 'react'
+import Loader from '../Loader'
 
 export type Props = {
   restaurants: Restaurant[]
+  isLoading?: boolean
 }
 
-const ProductList = ({ restaurants }: Props) => {
-  const [destaque, setDestaque] = useState('Destaque da semana')
+const ProductList = ({ restaurants, isLoading }: Props) => {
+  const [destaque] = useState('Destaque da semana')
+
+  if (isLoading) {
+    return <Loader />
+  }
   return (
-    <Container>
+    <Container className="container">
       <List>
         {restaurants.map((restaurants) => (
           <Product

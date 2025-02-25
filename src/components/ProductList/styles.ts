@@ -1,11 +1,16 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 
 export const Container = styled.div`
   max-width: 1024px;
   margin: 80px auto;
+
   li {
     list-style: none;
+  }
+
+  @media (max-width: ${breakpoints.desktop}) {
+    margin: 20px 10px;
   }
 `
 export const List = styled.ul`
@@ -13,6 +18,17 @@ export const List = styled.ul`
   grid-template-columns: 1fr 1fr 1fr;
   column-gap: 32px;
   row-gap: 32px;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 20px;
+    row-gap: 20px;
+  }
+  @media (max-width: ${breakpoints.mobile}) {
+    grid-template-columns: 1fr;
+    margin: 40px;
+    row-gap: 20px;
+  }
 `
 
 export const Modal = styled.div`
@@ -23,7 +39,7 @@ export const Modal = styled.div`
   height: 100%;
   display: none;
   align-items: center;
-  justiry-content: center;
+  justify-content: center;
   z-index: 2;
 
   &.visible {
@@ -48,6 +64,10 @@ export const ModalContent = styled.div`
   flex-direction: row;
   position: relative;
   z-index: 3;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    padding: 15px;
+  }
 `
 export const FoodImage = styled.img`
   object-fit: cover;
@@ -55,6 +75,10 @@ export const FoodImage = styled.img`
   height: 280px;
   margin: 32px 24px 32px 32px;
   object-fit: cover;
+
+  @media (max-width: ${breakpoints.mobile}) {
+    display: none;
+  }
 `
 export const ModalContainer = styled.div`
   max-width: 656px;

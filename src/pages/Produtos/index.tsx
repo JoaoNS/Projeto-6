@@ -1,21 +1,25 @@
 import { useParams } from 'react-router-dom'
 import Header from '../../components/Header'
-import Apresentacao from '../../components/Apresentacao'
-import FoodList from '../../components/FoodList'
+import FoodList from '../../components/ProductList'
 import Footer from '../../components/Footer'
-
 import { useGetRestaurantSelectedQuery } from '../../services/api'
 import Cart from '../../components/Cart'
+import Loader from '../../components/Loader'
+import Banner from '../../components/Banner'
 
-const Perfil = () => {
-  const { id } = useParams()
-  const { data: restaurantFood } = useGetRestaurantSelectedQuery(id!)
+type RestaurantParams = {
+  id: string
+}
+
+const Produtos = () => {
+  const { id } = useParams() as RestaurantParams
+  const { data: restaurantFood } = useGetRestaurantSelectedQuery(id)
 
   if (restaurantFood) {
     return (
       <>
         <Header />
-        <Apresentacao restaurant={restaurantFood} />
+        <Banner restaurant={restaurantFood} />
         <FoodList
           restaurant={restaurantFood}
           pedido={{
@@ -30,7 +34,7 @@ const Perfil = () => {
       </>
     )
   }
-  return <h3>Loading...</h3>
+  return <Loader />
 }
 
-export default Perfil
+export default Produtos

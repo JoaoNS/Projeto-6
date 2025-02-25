@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 
-export const ApresentacaoContainer = styled.div`
+export const Container = styled.div`
   height: 280px;
   background-repeat: no-repeat;
   background-size: cover;
@@ -12,6 +12,12 @@ export const ApresentacaoContainer = styled.div`
     max-width: 1024px;
     margin: 0 auto;
     z-index: 1;
+
+    @media (max-width: ${breakpoints.tablet}) {
+      display: block;
+      padding: 0 10px;
+      height: 100%;
+    }
   }
   &::after {
     position: absolute;
@@ -23,13 +29,13 @@ export const ApresentacaoContainer = styled.div`
     content: '';
   }
 `
-export const ApresentacaoCategoria = styled.p`
+export const Tipo = styled.p`
   color: ${cores.branco};
   font-size: 32px;
   font-weight: 100;
   padding-top: 25px;
 `
-export const ApresentacaoPrato = styled.p`
+export const Titulo = styled.p`
   color: ${cores.branco};
   font-size: 32px;
   font-weight: 900;
